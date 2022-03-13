@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>PE09</title>
+</head>
+<body>
+
+<div style="display: flex">
+    <div style="margin: 20px;">
+        Name:<input id="name" />
+        <br>
+        <br>
+        To Do tasks: <input id="todo" />
+        <button type="button" onclick="Sub()">Submit</button>
+    </div>
+    <select id="listbox" onchange="GetItem(this)" multiple="true" style="margin: 20px; width: 200px;">
+    </select>
+    <div style="margin: 20px;">
+        <label id="todolab"></label>
+        <br>
+        <button type="button" onclick="Del()" id="delete" disabled="true">Delete</button>
+    </div>
+</div>
+</body>
+<script>
+function GetItem(obj){
+    var todolab = document.getElementById("todolab");
+    var index = obj.selectedIndex;
+    var txt = obj.options[index].text;
+    todolab.innerText = txt;
+    document.getElementById("delete").disabled = false;
+}
+function Sub(){
+    var name = document.getElementById("name").value;
+    var todo = document.getElementById("todo").value;
+    if(name != "" && todo != ""){
+        var listbox = document.getElementById("listbox");
+        var opt = document.createElement("option");
+        opt.innerHTML = name + ": " + todo;
+	    listbox.appendChild(opt);
+    }
+}
+function Del(){
+    var listbox = document.getElementById("listbox");
+    var index = listbox.selectedIndex;
+    listbox.options.remove(index); 
+    document.getElementById("todolab").innerText = "";
+    document.getElementById("delete").disabled = true;
+}
+</script>
+</html>
